@@ -1,51 +1,74 @@
 package biz.martyn.budget;
 
-import java.awt.List;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
-// TODO public?
-public class Transaction {
+class Transaction implements Serializable {
 	
-	// TODO these should be accessed by accessors
-	// TODO validation?
-	String category; 
+	private static final long serialVersionUID = 1L;
+	
 	String desc; 
 	String date; 
 	int amount; 
-	String [] errors = {};
+	String category; 
 	
-	// TODO integer ought to be a float
-	public Transaction() { //(String desc, String date, int amount, String category) {
-//		this.desc = desc;
-//		this.date = date;
-//		this.amount = amount;
-//		this.category = category;
+	ArrayList<Object> errors = new ArrayList<>();
+	
+	public Transaction(String desc, String date, int amount, String category) {
+		this.desc = desc;
+		this.date = date;
+		this.amount = amount;
+		this.category = category;
 	}
 	
-//	public Transaction(String description, String date, int amount) {
-//		this(description, date, amount, "");
-//	}
+	public Transaction(String desc, String date, int amount) {
+		this(desc, date, amount, "");
+	}
 	
 	public boolean save() {
 		
-		// TODO validation
+		// validation
+		if (!isValid()) {
+			return false;
+	    }
+		
+		// get translations for this fund 
 		
 		
-		// TODO fetch transactions from transactions file
-		ArrayList<Transaction> transactions = new ArrayList();
-		transactions.add(0, this);
-		
-		System.out.println(transactions.toString());
-		
-		// TODO write transactions to storage
+		// write transactions to storage
 		
 		
+		return true;
+	}
+	
+	public boolean isValid() {
+		
+		errors.clear();
+		
+		// check description 
+		if (desc.isEmpty()) {
+			errors.add("Missing description");
+	    }
+		
+		// check date 
+		if (date.isEmpty()) {
+			errors.add("Missing date");
+	    }
+		
+		// check amount
+		if (amount == 0) {
+			errors.add("Amount cannot be zero");
+	    }
+				
+		// check category 
+		if (category.isEmpty()) {
+			errors.add("Missing category");
+	    }
 		
 		return false;
 	}
 	
-	public String [] getErrors() {
+	public ArrayList<Object> getErrors() {
 		return errors;
 	}
 	
