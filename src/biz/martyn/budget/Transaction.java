@@ -33,10 +33,12 @@ class Transaction implements Serializable {
 	    }
 		
 		// get translations for this fund 
-		
+		FileAdapter adapter = Budget.getAdapter();
+		ArrayList<Transaction> transactions = adapter.loadTransactions();
+		transactions.add(this);
 		
 		// write transactions to storage
-		
+		adapter.writeTransactions(transactions);
 		
 		return true;
 	}
@@ -65,12 +67,20 @@ class Transaction implements Serializable {
 			errors.add("Missing category");
 	    }
 		
-		return false;
+		return errors.isEmpty();
 	}
 	
 	public ArrayList<Object> getErrors() {
 		return errors;
 	}
 	
-	
+	public String[] toStringArray() {
+		String[] obj = {
+			desc,
+			date,
+			Integer.toString(amount) 
+		};
+		
+		return obj;
+	}
 }
