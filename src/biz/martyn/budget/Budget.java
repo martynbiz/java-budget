@@ -31,6 +31,7 @@ public class Budget {
 		
 		Container contentPane = frame.getContentPane();
 
+		// observable objects
 		Transactions transactions = new Transactions();
 		Funds funds = new Funds();
 		

@@ -1,6 +1,7 @@
 package biz.martyn.budget;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -39,16 +40,21 @@ public class Transactions implements Observable {
         }
     }
 
-	public ArrayList<String> getCategoriesList() {
+	public String [] getCategoriesArray() {
+		
 		ArrayList<String> categories = new ArrayList<> ();
-        categories.add("bike");
-        categories.add("car");
-        categories.add("cap");
-        categories.add("cape");
-        categories.add("canadian");
-        categories.add("caprecious");
-        categories.add("catepult");
-		return categories;
+        
+		// add categories if not contained (unique only)
+		for (Transaction t : transactions) {
+			if(!categories.contains(t.category)) {
+				categories.add(t.category);
+			}
+		}
+		
+		// sort categories
+		Collections.sort(categories);
+        
+		return categories.toArray(new String[0]);
 	} 	
 }
 

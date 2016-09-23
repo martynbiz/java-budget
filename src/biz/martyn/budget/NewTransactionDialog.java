@@ -31,7 +31,7 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 	 */
 	Transactions transactions;
 
-    public NewTransactionDialog(final Transactions transactions) {
+    public NewTransactionDialog(Transactions transactions) {
 		
 		this.transactions = transactions;
         
@@ -52,8 +52,8 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         // category
         panel.add(new JLabel("Category: (optional)"));
         
-        String [] categoryData = {"Internet", "Clothes", "Rent", "Salary", "Groceries"};
-        for( String cat : categoryData ) {
+        //transactions.getCategoriesArray()
+        for( String cat : transactions.getCategoriesArray() ) {
         	category.addItem(cat);
         }
         category.setEditable(true);
