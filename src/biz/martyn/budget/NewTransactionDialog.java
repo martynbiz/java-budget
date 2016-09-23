@@ -3,19 +3,15 @@ package biz.martyn.budget;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 public class NewTransactionDialog extends JDialog implements ActionListener {
 	
@@ -56,41 +52,12 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         // category
         panel.add(new JLabel("Category: (optional)"));
         
-//        String [] categoryData = {"Internet", "Clothes", "Rent", "Salary", "Groceries"};
-//        for( String cat : categoryData ) {
-//        	category.addItem(cat);
-//        }
-//        category.setEditable(true);
-//	    panel.add(category);
-        
-        /**	
-         * @see http://www.algosome.com/articles/java-jcombobox-autocomplete.html
-         */
-        try{
-			SwingUtilities.invokeAndWait(new Runnable() {
-			    @Override
-			    public void run() {
-//			    	ArrayList<String> categories = transactions.getCategoriesList(); //new ArrayList<> ();
-			    	ArrayList<String> categories = new ArrayList<> ();
-			        categories.add("bike");
-			        categories.add("car");
-			        categories.add("cap");
-			        categories.add("cape");
-			        categories.add("canadian");
-			        categories.add("caprecious");
-			        categories.add("catepult");
-			        StringSearchable searchable = new StringSearchable(categories);
-			        AutocompleteJComboBox categoryCombo = new AutocompleteJComboBox(searchable);
-			        panel.add(categoryCombo);
-			    }
-			});
-		} 
-		catch (InvocationTargetException e) {
-			System.out.println("InvocationTargetException");
-		}
-		catch (InterruptedException e) {
-			System.out.println("InterruptedException");
-		}
+        String [] categoryData = {"Internet", "Clothes", "Rent", "Salary", "Groceries"};
+        for( String cat : categoryData ) {
+        	category.addItem(cat);
+        }
+        category.setEditable(true);
+	    panel.add(category);
 	    
 	    // save button 
 	    saveButton = new JButton("Add");

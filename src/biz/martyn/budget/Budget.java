@@ -7,7 +7,6 @@
 // TODO testing
 // TODO docblocks, javadoc
 
-// TODO menu bar with shortcuts 
 // TODO configuration
 // TODO Nicer GUI
 // TODO multiple languages
@@ -20,12 +19,9 @@ package biz.martyn.budget;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
 public class Budget {
 	public static void main(String args[]) {
