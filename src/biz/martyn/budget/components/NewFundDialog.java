@@ -1,4 +1,4 @@
-package biz.martyn.budget;
+package biz.martyn.budget.components;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

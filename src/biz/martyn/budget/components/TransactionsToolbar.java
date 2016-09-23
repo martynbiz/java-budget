@@ -1,9 +1,10 @@
-package biz.martyn.budget;
+package biz.martyn.budget.components;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JToolBar;
 
+import biz.martyn.budget.Observer;
 import biz.martyn.budget.models.Fund;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;

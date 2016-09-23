@@ -21,8 +21,12 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import biz.martyn.budget.components.TransactionsTable;
+import biz.martyn.budget.components.TransactionsToolbar;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;
+import biz.martyn.budget.storage.FileAdapter;
+import biz.martyn.budget.storage.StorageAdapter;
 
 public class Budget {
 	public static void main(String args[]) {

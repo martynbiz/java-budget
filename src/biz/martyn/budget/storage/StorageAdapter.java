@@ -1,4 +1,4 @@
-package biz.martyn.budget;
+package biz.martyn.budget.storage;
 
 import java.util.ArrayList;
 

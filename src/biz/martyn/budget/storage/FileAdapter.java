@@ -1,4 +1,4 @@
-package biz.martyn.budget;
+package biz.martyn.budget.storage;
 
 import java.io.File;
 import java.io.FileInputStream;

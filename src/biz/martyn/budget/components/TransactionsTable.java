@@ -1,8 +1,9 @@
-package biz.martyn.budget;
+package biz.martyn.budget.components;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import biz.martyn.budget.Observer;
 import biz.martyn.budget.models.Transaction;
 import biz.martyn.budget.models.Transactions;
 
