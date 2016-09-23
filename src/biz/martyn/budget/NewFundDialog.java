@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 public class NewFundDialog extends JDialog implements ActionListener {
@@ -36,6 +37,8 @@ public class NewFundDialog extends JDialog implements ActionListener {
         // description 
         panel.add(new JLabel("Name:"));
         panel.add(name);
+        
+        panel.add(new JSeparator());
 	    
 	    // save button 
 	    saveButton = new JButton("Add");

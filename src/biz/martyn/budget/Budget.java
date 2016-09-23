@@ -35,6 +35,8 @@ public class Budget {
 		Transactions transactions = new Transactions();
 		Funds funds = new Funds();
 		
+//		System.out.println(transactions.getCategoriesArray());
+		
 		// toolbar 
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds);
 	    contentPane.add(toolbar, BorderLayout.NORTH);

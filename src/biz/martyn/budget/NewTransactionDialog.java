@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 public class NewTransactionDialog extends JDialog implements ActionListener {
@@ -22,9 +22,9 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
     private JTextField desc = new JTextField();
     private JTextField date = new JTextField();
     private JTextField amount = new JTextField("0");
-    private JComboBox<String> category = new JComboBox<>();
-    private JButton saveButton = null;
-    private JButton cancelButton = null;
+    private CategoryComboBox category;
+    private JButton saveButton = new JButton("Add");
+    private JButton cancelButton = new JButton("Cancel");
 	
 	/**
 	 * @var Transactions
@@ -34,6 +34,7 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
     public NewTransactionDialog(Transactions transactions) {
 		
 		this.transactions = transactions;
+		category = new CategoryComboBox(transactions);
         
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
@@ -53,19 +54,18 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         panel.add(new JLabel("Category: (optional)"));
         
         //transactions.getCategoriesArray()
-        for( String cat : transactions.getCategoriesArray() ) {
-        	category.addItem(cat);
-        }
-        category.setEditable(true);
+        
 	    panel.add(category);
 	    
+	    panel.add(new JSeparator());
+	    
 	    // save button 
-	    saveButton = new JButton("Add");
+//	    saveButton = new JButton("Add");
 	    saveButton.addActionListener(this);
 	    panel.add(saveButton); 
 	      
 	    // cancel button 
-	    cancelButton = new JButton("Cancel");
+//	    cancelButton = new JButton("Cancel");
 	    cancelButton.addActionListener(this);
 	    panel.add(cancelButton);
         

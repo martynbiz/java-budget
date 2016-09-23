@@ -11,6 +11,7 @@ public class Transactions implements Observable {
     private ArrayList<Transaction> transactions;
     
     public Transactions() {
+    	System.out.println("init Transactions");
     	transactions = Budget.getAdapter().loadTransactions();
     }
 
@@ -43,7 +44,7 @@ public class Transactions implements Observable {
 	public String [] getCategoriesArray() {
 		
 		ArrayList<String> categories = new ArrayList<> ();
-        
+		
 		// add categories if not contained (unique only)
 		for (Transaction t : transactions) {
 			if(!categories.contains(t.category)) {
