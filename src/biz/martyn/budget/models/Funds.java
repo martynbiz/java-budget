@@ -1,7 +1,11 @@
-package biz.martyn.budget;
+package biz.martyn.budget.models;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import biz.martyn.budget.Budget;
+import biz.martyn.budget.Observable;
+import biz.martyn.budget.Observer;
 
 
 public class Funds implements Observable {

@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import biz.martyn.budget.models.Transaction;
+import biz.martyn.budget.models.Transactions;
+
 //import org.jdatepicker.impl.JDatePanelImpl;
 //import org.jdatepicker.impl.JDatePickerImpl;
 //import org.jdatepicker.impl.UtilDateModel;
@@ -87,12 +90,11 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         if(saveButton == e.getSource()) {
         	
         	// save transaction
-        	
-        	Transaction transaction = transactions.createObject(
+        	Transaction transaction = new Transaction(
     			desc.getText(), 
     			date.getText(), 
-    			Integer.parseInt(amount.getText()), 
-    			category.getSelectedItem().toString()
+    			Integer.parseInt(amount.getText()),
+    			(category.getSelectedItem() != null) ? category.getSelectedItem().toString() : ""
         	);
         	
             if (transaction.isValid()) {

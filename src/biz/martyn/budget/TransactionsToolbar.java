@@ -4,6 +4,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JToolBar;
 
+import biz.martyn.budget.models.Fund;
+import biz.martyn.budget.models.Funds;
+import biz.martyn.budget.models.Transactions;
+
 public class TransactionsToolbar extends JToolBar implements Observer {
 
 	/**

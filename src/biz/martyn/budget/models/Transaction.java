@@ -1,17 +1,16 @@
-package biz.martyn.budget;
+package biz.martyn.budget.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-class Transaction implements Serializable {
+public class Transaction implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	
-	String desc; 
-	String date; 
-	int amount; 
-	String category; 
+	public String desc; 
+	public String date; 
+	public int amount; 
+	public String category; // optional
 	
 	ArrayList<Object> errors = new ArrayList<>();
 	
@@ -25,24 +24,6 @@ class Transaction implements Serializable {
 	public Transaction(String desc, String date, int amount) {
 		this(desc, date, amount, "");
 	}
-	
-//	public boolean save() {
-//		
-//		// validation
-//		if (!isValid()) {
-//			return false;
-//	    }
-//		
-//		// get translations for this fund 
-//		StorageAdapter adapter = Budget.getAdapter();
-//		ArrayList<Transaction> transactions = adapter.loadTransactions();
-//		transactions.add(this);
-//		
-//		// write transactions to storage
-//		adapter.writeTransactions(transactions);
-//		
-//		return true;
-//	}
 	
 	public boolean isValid() {
 		
@@ -63,10 +44,10 @@ class Transaction implements Serializable {
 			errors.add("Amount cannot be zero");
 	    }
 				
-		// check category 
-		if (category.isEmpty()) {
-			errors.add("Missing category");
-	    }
+//		// check category 
+//		if (category.isEmpty()) {
+//			errors.add("Missing category");
+//	    }
 		
 		return errors.isEmpty();
 	}
@@ -79,7 +60,7 @@ class Transaction implements Serializable {
 		String[] obj = {
 			desc,
 			date,
-			Integer.toString(amount) 
+			Integer.toString(amount)
 		};
 		
 		return obj;

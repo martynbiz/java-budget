@@ -21,6 +21,9 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import biz.martyn.budget.models.Funds;
+import biz.martyn.budget.models.Transactions;
+
 public class Budget {
 	public static void main(String args[]) {
 		

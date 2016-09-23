@@ -2,6 +2,8 @@ package biz.martyn.budget;
 
 import javax.swing.JComboBox;
 
+import biz.martyn.budget.models.Transactions;
+
 public class CategoryComboBox extends JComboBox<String> implements Observer {
 	
 	/**

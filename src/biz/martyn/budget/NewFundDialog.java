@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import biz.martyn.budget.models.Fund;
+import biz.martyn.budget.models.Funds;
+
 public class NewFundDialog extends JDialog implements ActionListener {
 	
     private static final long serialVersionUID = 1L;

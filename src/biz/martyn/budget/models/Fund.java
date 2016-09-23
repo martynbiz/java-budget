@@ -1,38 +1,19 @@
-package biz.martyn.budget;
+package biz.martyn.budget.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-class Fund implements Serializable {
+public class Fund implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	String name; 
+	public String name; 
 	
 	ArrayList<Object> errors = new ArrayList<>();
 	
 	public Fund(String name) {
 		this.name = name;
 	}
-	
-//	public boolean save() {
-//		
-//		// validation
-//		if (!isValid()) {
-//			return false;
-//	    }
-//		
-//		// get translations for this fund 
-//		StorageAdapter adapter = Budget.getAdapter();
-//		ArrayList<Fund> funds = adapter.loadFunds();
-//		funds.add(this);
-//		
-//		// write funds to storage
-//		adapter.writeFunds(funds);
-//		
-//		return true;
-//	}
 	
 	public boolean isValid() {
 		

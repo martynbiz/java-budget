@@ -8,6 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import biz.martyn.budget.models.Fund;
+import biz.martyn.budget.models.Transaction;
+
 /**
  * 
  * @author martyn
