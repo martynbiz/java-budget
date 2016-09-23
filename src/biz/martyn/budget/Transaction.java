@@ -3,10 +3,10 @@ package biz.martyn.budget;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 class Transaction implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
 	
 	String desc; 
 	String date; 
