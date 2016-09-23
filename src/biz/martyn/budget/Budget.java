@@ -1,22 +1,17 @@
-/**
- * TODO
- * 
- * - load funds from file
- * 
- * - write to sqlite db with SQLiteAdapter class
- */
-
+// TODO http://www.algosome.com/articles/java-jcombobox-autocomplete.html
+// TODO store categories 
+// TODO date selector
 // TODO maven
-// TODO Sorting/filter table
-// TODO menu bar with shortcuts 
-// TODO configuration
+// TODO java table filter
+// TODO graphs
 // TODO testing
 // TODO docblocks, javadoc
-// TODO date selector
-// TODO graphs
+
+// TODO menu bar with shortcuts 
+// TODO configuration
 // TODO Nicer GUI
-// TODO category autocomplete box 
 // TODO multiple languages
+// TODO write to sqlite db with SQLiteAdapter class
 
 // TODO android app 
 // TODO .deb file 
@@ -28,7 +23,6 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-
 
 public class Budget {
 	public static void main(String args[]) {

@@ -21,7 +21,7 @@ public class TransactionsToolbar extends JToolBar implements Observer {
 		
 		this.funds = funds;
 	    
-	    // fund button 
+	    // fund button and dialog
 	    newFundButton = new JButton("New fund");
 		NewFundDialog fundsDialog = new NewFundDialog(funds);
 		fundsDialog.setLocationRelativeTo(this);
@@ -29,7 +29,7 @@ public class TransactionsToolbar extends JToolBar implements Observer {
 	    this.add(newFundButton);
 	    this.addSeparator();
 
-	    // transaction button 
+	    // transaction button and dialog
 	    newTransactionButton = new JButton("New transaction");
 		NewTransactionDialog transactionsDialog = new NewTransactionDialog(transactions);
 		transactionsDialog.setLocationRelativeTo(this);
@@ -37,8 +37,7 @@ public class TransactionsToolbar extends JToolBar implements Observer {
 	    this.add(newTransactionButton);
 	    this.addSeparator();
 		
-		// fund drop down
-	    // TODO create FundsComboBox 
+		// funds drop down
 		funds.addObserver(this);
 	    fundsComboBox = new JComboBox<>();
 	    this.add(fundsComboBox);

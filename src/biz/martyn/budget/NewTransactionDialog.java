@@ -55,6 +55,7 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         for( String cat : categoryData ) {
         	category.addItem(cat);
         }
+        category.setEditable(true);
 	    panel.add(category);
 	    
 	    // save button 
