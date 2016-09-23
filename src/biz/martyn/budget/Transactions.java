@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Transactions {
+public class Transactions implements Observable {
 
     private List<Observer> observers = new ArrayList<Observer>();
     private ArrayList<Transaction> transactions;
@@ -31,7 +31,7 @@ public class Transactions {
     	boolean result = Budget.getAdapter().writeTransactions(transactions);
     	
     	if (result) {
-            notifyAllObservers();
+            notifyObservers();
     	}
     	
     	return result;
@@ -46,11 +46,11 @@ public class Transactions {
 //        notifyAllObservers();
 //    }
 
-    public void attach(Observer observer){
+    public void addObserver(Observer observer){
         observers.add(observer);		
     }
 
-    public void notifyAllObservers(){
+    public void notifyObservers(){
         for (Observer observer : observers) {
             observer.update();
         }

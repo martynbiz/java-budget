@@ -22,7 +22,7 @@ public class TransactionsTable extends JTable implements Observer {
 	public TransactionsTable(Transactions transactions) {
 		
 		this.transactions = transactions;
-		transactions.attach(this);
+		transactions.addObserver(this);
 		
 		tableModel = new DefaultTableModel(columnNames, 0);
 		setModel(tableModel);
