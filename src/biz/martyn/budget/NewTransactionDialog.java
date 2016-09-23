@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+//import org.jdatepicker.impl.JDatePanelImpl;
+//import org.jdatepicker.impl.JDatePickerImpl;
+//import org.jdatepicker.impl.UtilDateModel;
+
 public class NewTransactionDialog extends JDialog implements ActionListener {
 	
     private static final long serialVersionUID = 1L;
