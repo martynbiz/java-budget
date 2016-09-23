@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-
 /**
  * 
  * @author martyn
@@ -20,6 +19,17 @@ public class FileAdapter implements StorageAdapter {
     File fundsFile = new File("data/funds.ser");
 	
 	public ArrayList<Transaction> loadTransactions() {
+		
+//		// create a new file 
+//    	if(!transactionsFile.exists()) { 
+//    		
+//    		// fill with some test data 
+//    		ArrayList<Transaction> transactions = new ArrayList<>();
+//    		transactions.add(new Transaction("Internet", "2016-09-20", -28));
+//    		transactions.add(new Transaction("Groceries", "2016-09-20", -26));
+//    		
+//    		writeFile(transactionsFile, transactions);
+//    	}
 		
 		return loadFile(transactionsFile);
 	}
@@ -53,8 +63,8 @@ public class FileAdapter implements StorageAdapter {
 	    		
 //	    		// fill with some test data 
 ////	    		ArrayList<Transaction> transactions = new ArrayList<>();
-//	    		transactions.add(new Transaction("Internet", "2016-09-20", -28));
-//	    		transactions.add(new Transaction("Groceries", "2016-09-20", -26));
+//	    		obj.add(new Transaction("Internet", "2016-09-20", -28));
+//	    		obj.add(new Transaction("Groceries", "2016-09-20", -26));
 	    		
 	    		writeFile(file, obj);
 	    	}
@@ -65,7 +75,7 @@ public class FileAdapter implements StorageAdapter {
 	        
 	    } 
 	    catch(IOException e){
-	    	System.out.println("IOException");
+	    	System.out.println("IOException read");
 	    } 
 	    catch(ClassNotFoundException e) {
 	    	System.out.println("ClassNotFoundException");
@@ -97,7 +107,7 @@ public class FileAdapter implements StorageAdapter {
 	        
 	    } 
 	    catch(IOException e){
-	    	System.out.println("IOException");
+	    	System.out.println("IOException write");
 	    } 
 		finally {
 			if (out != null) {

@@ -45,16 +45,17 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         // date 
         panel.add(new JLabel("Date:"));
         panel.add(date);
+//        UtilDateModel model = new UtilDateModel();
+//        JDatePanelImpl datePanel = new JDatePanelImpl(model, null);
+//        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, null);
+//		panel.add(datePicker);
         
         // amount
         panel.add(new JLabel("Amount:"));
         panel.add(amount);
         
         // category
-        panel.add(new JLabel("Category: (optional)"));
-        
-        //transactions.getCategoriesArray()
-        
+        panel.add(new JLabel("Category: (optional)"));        
 	    panel.add(category);
 	    
 	    panel.add(new JSeparator());
@@ -82,7 +83,8 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         if(saveButton == e.getSource()) {
         	
         	// save transaction
-        	Transaction transaction = new Transaction(
+        	
+        	Transaction transaction = transactions.createObject(
     			desc.getText(), 
     			date.getText(), 
     			Integer.parseInt(amount.getText()), 

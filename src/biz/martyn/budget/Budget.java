@@ -1,5 +1,3 @@
-// TODO http://www.algosome.com/articles/java-jcombobox-autocomplete.html
-// TODO store categories 
 // TODO date selector
 // TODO maven
 // TODO java table filter
@@ -46,24 +44,6 @@ public class Budget {
 		table.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		frame.setSize(600, 300);
 		frame.setVisible(true);
