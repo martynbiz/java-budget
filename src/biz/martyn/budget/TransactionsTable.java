@@ -10,9 +10,6 @@ import javax.swing.table.DefaultTableModel;
 public class TransactionsTable extends JTable implements Observer {
 	
 	private static final long serialVersionUID = 1L;
-	private Object [] columnNames = { "Description", "Date", "Amount" };
-	
-	DefaultTableModel tableModel;
 	
 	/**
 	 * @var Transactions
@@ -22,10 +19,14 @@ public class TransactionsTable extends JTable implements Observer {
 	public TransactionsTable(Transactions transactions) {
 		
 		this.transactions = transactions;
+		
+		// changes to transactions data will automatically update table 
 		transactions.addObserver(this);
 		
-		tableModel = new DefaultTableModel(columnNames, 0);
-		setModel(tableModel);
+		// set the table model 
+		Object [] columnNames = { "Description", "Date", "Amount" };
+		setModel( new DefaultTableModel(columnNames, 0) );
+		
 		update();
 
 //		this.getModel().addTableModelListener(new TableModelListener() {
@@ -36,13 +37,13 @@ public class TransactionsTable extends JTable implements Observer {
 //		    }
 //		});
 	}
-	
-//	public void render() {
-//		
-//	}
 
 	@Override
 	public void update() {
+		
+		DefaultTableModel tableModel = (DefaultTableModel) this.getModel();
+		
+		// rebuild the table rows 
 		tableModel.setRowCount(0);
 		for (Transaction t : transactions.get()) {
 			tableModel.addRow( t.toStringArray() );

@@ -26,23 +26,23 @@ class Transaction implements Serializable {
 		this(desc, date, amount, "");
 	}
 	
-	public boolean save() {
-		
-		// validation
-		if (!isValid()) {
-			return false;
-	    }
-		
-		// get translations for this fund 
-		StorageAdapter adapter = Budget.getAdapter();
-		ArrayList<Transaction> transactions = adapter.loadTransactions();
-		transactions.add(this);
-		
-		// write transactions to storage
-		adapter.writeTransactions(transactions);
-		
-		return true;
-	}
+//	public boolean save() {
+//		
+//		// validation
+//		if (!isValid()) {
+//			return false;
+//	    }
+//		
+//		// get translations for this fund 
+//		StorageAdapter adapter = Budget.getAdapter();
+//		ArrayList<Transaction> transactions = adapter.loadTransactions();
+//		transactions.add(this);
+//		
+//		// write transactions to storage
+//		adapter.writeTransactions(transactions);
+//		
+//		return true;
+//	}
 	
 	public boolean isValid() {
 		

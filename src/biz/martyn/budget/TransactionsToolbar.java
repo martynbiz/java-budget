@@ -4,32 +4,53 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JToolBar;
 
-public class TransactionsToolbar extends JToolBar {
+public class TransactionsToolbar extends JToolBar implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public TransactionsToolbar(NewTransactionDialog dialog) {
+	Funds funds;
+	
+	JButton newFundButton;
+	JButton newTransactionButton;
+	JComboBox<String> fundsComboBox;
+	
+	public TransactionsToolbar(Transactions transactions, Funds funds) {
 		
-//		JToolBar toolbar = new JToolBar();
-	    this.setRollover(true);
+		this.funds = funds;
 	    
 	    // fund button 
-	    JButton newFundButton = new JButton("New fund");
+	    newFundButton = new JButton("New fund");
+		NewFundDialog fundsDialog = new NewFundDialog(funds);
+		fundsDialog.setLocationRelativeTo(this);
+	    newFundButton.addActionListener(fundsDialog);
 	    this.add(newFundButton);
 	    this.addSeparator();
 
 	    // transaction button 
-	    JButton newTransactionButton = new JButton("New transaction");
-	    newTransactionButton.addActionListener(dialog);
+	    newTransactionButton = new JButton("New transaction");
+		NewTransactionDialog transactionsDialog = new NewTransactionDialog(transactions);
+		transactionsDialog.setLocationRelativeTo(this);
+	    newTransactionButton.addActionListener(transactionsDialog);
 	    this.add(newTransactionButton);
 	    this.addSeparator();
-	    
-	    // fund drop down
-	    String[] funds = new String[]{"Nationwide","Hokuriku"};
-	    JComboBox<String> fundsComboBox = new JComboBox<>(funds);
+		
+		// fund drop down
+	    // TODO create FundsComboBox 
+		funds.addObserver(this);
+	    fundsComboBox = new JComboBox<>();
 	    this.add(fundsComboBox);
+	    
+	    update();
+	}
+
+	@Override
+	public void update() {
+		fundsComboBox.removeAllItems();
+		for (Fund f : funds.get()) {
+	    	fundsComboBox.addItem( f.name );
+		}
 	}
 }

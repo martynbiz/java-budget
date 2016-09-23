@@ -16,32 +16,52 @@ import java.util.ArrayList;
  */
 public class FileAdapter implements StorageAdapter {
     
-    File f = new File("data/transactions.ser");
+    File transactionsFile = new File("data/transactions.ser");
+    File fundsFile = new File("data/funds.ser");
 	
-	@SuppressWarnings("unchecked")
 	public ArrayList<Transaction> loadTransactions() {
 		
-		ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+		return loadFile(transactionsFile);
+	}
+	
+	public boolean writeTransactions(ArrayList<Transaction> transactions) {
+		
+		return writeFile(transactionsFile, transactions);
+	}
+	
+	public ArrayList<Fund> loadFunds() {
+		
+		return loadFile(fundsFile);
+	}
+	
+	public boolean writeFunds(ArrayList<Fund> funds) {
+		
+		return writeFile(fundsFile, funds);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private <T> ArrayList<T> loadFile(File file) {
+		
+		ArrayList<T> obj = new ArrayList<>();
 		
         ObjectInputStream in = null;
         
 		try {
 	    	
 	    	// create a new file 
-	    	if(!f.exists()) { 
+	    	if(!file.exists()) { 
 	    		
 //	    		// fill with some test data 
 ////	    		ArrayList<Transaction> transactions = new ArrayList<>();
 //	    		transactions.add(new Transaction("Internet", "2016-09-20", -28));
 //	    		transactions.add(new Transaction("Groceries", "2016-09-20", -26));
 	    		
-	    		writeTransactions(transactions);
+	    		writeFile(file, obj);
 	    	}
 
-	        FileInputStream fis = new FileInputStream(f);
+	        FileInputStream fis = new FileInputStream(file);
 	        in = new ObjectInputStream(fis);
-	        transactions = (ArrayList<Transaction>) in.readObject();
-	        System.out.println(transactions);
+	        obj = (ArrayList<T>) in.readObject();
 	        
 	    } 
 	    catch(IOException e){
@@ -60,18 +80,18 @@ public class FileAdapter implements StorageAdapter {
 			}
 		}
 		
-		return transactions;
+		return obj;
 	}
 	
-	public boolean writeTransactions(ArrayList<Transaction> transactions) {
+	private <T> boolean writeFile(File file, ArrayList<T> obj) {
 		
 		ObjectOutputStream out = null;
 		boolean result = false;
 		try {
 	    	
-	    	FileOutputStream fos = new FileOutputStream(f);
+	    	FileOutputStream fos = new FileOutputStream(file);
 	    	out = new ObjectOutputStream(fos);
-	        out.writeObject(transactions);
+	        out.writeObject(obj);
 	        
 	        result = true;
 	        

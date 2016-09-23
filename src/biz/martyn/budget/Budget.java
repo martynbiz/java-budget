@@ -1,3 +1,11 @@
+/**
+ * TODO
+ * 
+ * - load funds from file
+ * 
+ * - write to sqlite db with SQLiteAdapter class
+ */
+
 // TODO maven
 // TODO Sorting/filter table
 // TODO menu bar with shortcuts 
@@ -31,13 +39,10 @@ public class Budget {
 		Container contentPane = frame.getContentPane();
 
 		Transactions transactions = new Transactions();
-		
-		// new transaction dialog 
-		NewTransactionDialog dialog = new NewTransactionDialog(transactions);
-		dialog.setLocationRelativeTo(contentPane);
+		Funds funds = new Funds();
 		
 		// toolbar 
-		TransactionsToolbar toolbar = new TransactionsToolbar(dialog);
+		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds);
 	    contentPane.add(toolbar, BorderLayout.NORTH);
 	    
 		// transactions table
