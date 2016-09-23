@@ -37,7 +37,19 @@ public class Transactions implements Observable {
         for (Observer observer : observers) {
             observer.update();
         }
-    } 	
+    }
+
+	public ArrayList<String> getCategoriesList() {
+		ArrayList<String> categories = new ArrayList<> ();
+        categories.add("bike");
+        categories.add("car");
+        categories.add("cap");
+        categories.add("cape");
+        categories.add("canadian");
+        categories.add("caprecious");
+        categories.add("catepult");
+		return categories;
+	} 	
 }
 
 
