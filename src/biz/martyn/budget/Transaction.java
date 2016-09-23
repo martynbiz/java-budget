@@ -3,6 +3,7 @@ package biz.martyn.budget;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 class Transaction implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -33,7 +34,7 @@ class Transaction implements Serializable {
 	    }
 		
 		// get translations for this fund 
-		FileAdapter adapter = Budget.getAdapter();
+		StorageAdapter adapter = Budget.getAdapter();
 		ArrayList<Transaction> transactions = adapter.loadTransactions();
 		transactions.add(this);
 		

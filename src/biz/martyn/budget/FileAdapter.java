@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+
 /**
  * 
  * @author martyn
@@ -62,14 +63,17 @@ public class FileAdapter implements StorageAdapter {
 		return transactions;
 	}
 	
-	public void writeTransactions(ArrayList<Transaction> transactions) {
+	public boolean writeTransactions(ArrayList<Transaction> transactions) {
 		
 		ObjectOutputStream out = null;
+		boolean result = false;
 		try {
 	    	
 	    	FileOutputStream fos = new FileOutputStream(f);
 	    	out = new ObjectOutputStream(fos);
 	        out.writeObject(transactions);
+	        
+	        result = true;
 	        
 	    } 
 	    catch(IOException e){
@@ -84,5 +88,7 @@ public class FileAdapter implements StorageAdapter {
 			    } 
 			}
 		}
+		
+		return result;
 	}
 }
