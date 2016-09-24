@@ -18,14 +18,13 @@ public class FundsComboBox extends JComboBox<String> implements Observer {
 	public FundsComboBox(Funds funds) {
 		this.funds = funds;
 		funds.addObserver(this);
-        setEditable(true);
         update();
 	}
 
 	@Override
 	public void update() {
 		this.removeAllItems();
-		for (Fund f : funds.get()) {
+		for (Fund f : funds) {
 	    	this.addItem( f.name );
 		}
 	}

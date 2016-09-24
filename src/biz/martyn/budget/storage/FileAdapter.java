@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import biz.martyn.budget.models.Fund;
 import biz.martyn.budget.models.Transaction;
@@ -21,30 +22,30 @@ public class FileAdapter implements StorageAdapter {
     File transactionsFile = new File("data/transactions.ser");
     File fundsFile = new File("data/funds.ser");
 	
-	public ArrayList<Transaction> loadTransactions() {
+	public List<Transaction> loadTransactions() {
 		
 		return loadFile(transactionsFile);
 	}
 	
-	public boolean writeTransactions(ArrayList<Transaction> transactions) {
+	public boolean writeTransactions(List<Transaction> transactions) {
 		
 		return writeFile(transactionsFile, transactions);
 	}
 	
-	public ArrayList<Fund> loadFunds() {
+	public List<Fund> loadFunds() {
 		
 		return loadFile(fundsFile);
 	}
 	
-	public boolean writeFunds(ArrayList<Fund> funds) {
+	public boolean writeFunds(List<Fund> funds) {
 		
 		return writeFile(fundsFile, funds);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T> ArrayList<T> loadFile(File file) {
+	private <T> List<T> loadFile(File file) {
 		
-		ArrayList<T> obj = new ArrayList<>();
+		List<T> obj = new ArrayList<>();
 		
         ObjectInputStream in = null;
         
@@ -54,7 +55,7 @@ public class FileAdapter implements StorageAdapter {
 	    	if(!file.exists()) { 
 	    		
 //	    		// fill with some test data 
-////	    		ArrayList<Transaction> transactions = new ArrayList<>();
+////	    		List<Transaction> transactions = new List<>();
 //	    		obj.add(new Transaction("Internet", "2016-09-20", -28));
 //	    		obj.add(new Transaction("Groceries", "2016-09-20", -26));
 	    		
@@ -63,7 +64,7 @@ public class FileAdapter implements StorageAdapter {
 
 	        FileInputStream fis = new FileInputStream(file);
 	        in = new ObjectInputStream(fis);
-	        obj = (ArrayList<T>) in.readObject();
+	        obj = (List<T>) in.readObject();
 	        
 	    } 
 	    catch(IOException e){
@@ -85,7 +86,7 @@ public class FileAdapter implements StorageAdapter {
 		return obj;
 	}
 	
-	private <T> boolean writeFile(File file, ArrayList<T> obj) {
+	private <T> boolean writeFile(File file, List<T> obj) {
 		
 		ObjectOutputStream out = null;
 		boolean result = false;

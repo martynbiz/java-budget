@@ -1,9 +1,11 @@
-// TODO switch funds 
+// TODO make trans, funds iterate
+// TODO switch funds: funds.get(0);
 // TODO maven
 // TODO java table filter
 // TODO graphs
 // TODO testing
 // TODO docblocks, javadoc
+// TODO language switcher 
 
 // TODO configuration
 // TODO Nicer GUI
@@ -42,9 +44,9 @@ public class Budget {
 		Container contentPane = frame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		// observable objects
-		Transactions transactions = new Transactions(getAdapter());
+		// models
 		Funds funds = new Funds(getAdapter());
+		Transactions transactions = new Transactions(getAdapter());
 		
 		// toolbar 
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
