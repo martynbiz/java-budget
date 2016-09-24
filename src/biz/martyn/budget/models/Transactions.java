@@ -12,15 +12,22 @@ public class Transactions implements Iterable<Transaction> {
 
     List<Transaction> transactions;
     StorageAdapter storageAdapter;
+    Fund fund;
 
     public Transactions(StorageAdapter storageAdapter) {
     	this.storageAdapter = storageAdapter;
-    	transactions = storageAdapter.loadTransactions();
+    	transactions = new ArrayList<>();
     }
 
     public void insert(Transaction transaction) {
         transactions.add(transaction);
-    	storageAdapter.writeTransactions(transactions);
+    	storageAdapter.writeTransactions(transactions, fund);
+    	notifyObservers();
+    }
+
+    public void setFund(Fund fund) {
+    	this.fund = fund;
+    	transactions = storageAdapter.loadTransactions(fund);
     	notifyObservers();
     }
 
@@ -88,6 +95,10 @@ public class Transactions implements Iterable<Transaction> {
             transactions.remove(--currentIndex);
         }
     }
+
+	public Fund getFund() {
+		return fund;
+	}
 }
 
 //import java.util.ArrayList;

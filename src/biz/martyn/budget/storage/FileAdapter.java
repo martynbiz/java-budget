@@ -19,27 +19,33 @@ import biz.martyn.budget.models.Transaction;
  */
 public class FileAdapter implements StorageAdapter {
     
-    File transactionsFile = new File("data/transactions.ser");
+//    File transactionsFile = new File("data/transactions.ser");
     File fundsFile = new File("data/funds.ser");
 	
-	public List<Transaction> loadTransactions() {
-		
-		return loadFile(transactionsFile);
+	public List<Transaction> loadTransactions(Fund fund) {
+		return loadFile(getTransactionsFile(fund));
 	}
-	
-	public boolean writeTransactions(List<Transaction> transactions) {
-		
-		return writeFile(transactionsFile, transactions);
+
+	public boolean writeTransactions(List<Transaction> transactions, Fund fund) {
+		return writeFile(getTransactionsFile(fund), transactions);
 	}
 	
 	public List<Fund> loadFunds() {
-		
-		return loadFile(fundsFile);
+		return loadFile(getFundsFile());
 	}
 	
 	public boolean writeFunds(List<Fund> funds) {
-		
-		return writeFile(fundsFile, funds);
+		return writeFile(getFundsFile(), funds);
+	}
+	
+	private File getFundsFile() {
+		File file = new File("data/funds.ser");
+		return file;
+	}
+	
+	private File getTransactionsFile(Fund fund) {
+		File file = new File("data/transactions/" + fund.name + ".ser");
+		return file;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -51,14 +57,9 @@ public class FileAdapter implements StorageAdapter {
         
 		try {
 	    	
-	    	// create a new file 
+			// create a new file, dir
 	    	if(!file.exists()) { 
-	    		
-//	    		// fill with some test data 
-////	    		List<Transaction> transactions = new List<>();
-//	    		obj.add(new Transaction("Internet", "2016-09-20", -28));
-//	    		obj.add(new Transaction("Groceries", "2016-09-20", -26));
-	    		
+	    		file.getParentFile().mkdirs();
 	    		writeFile(file, obj);
 	    	}
 

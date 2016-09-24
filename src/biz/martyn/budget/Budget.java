@@ -1,5 +1,5 @@
-// TODO make trans, funds iterate
-// TODO switch funds: funds.get(0);
+// TODO no duplicate fund names
+// TODO edit transactions 
 // TODO maven
 // TODO java table filter
 // TODO graphs
@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 
 import biz.martyn.budget.components.TransactionsTable;
 import biz.martyn.budget.components.TransactionsToolbar;
+import biz.martyn.budget.models.Fund;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;
 import biz.martyn.budget.storage.FileAdapter;
@@ -34,19 +35,26 @@ import biz.martyn.budget.storage.StorageAdapter;
 public class Budget {
 	
 	public static void main(String args[]) {
+
+		// collections 
 		
-		Locale locale = new Locale("ja"); // Locale.ENGLISH
-		ResourceBundle bundle = ResourceBundle.getBundle("biz.martyn.budget.i18n.Text", locale);
+		Funds funds = new Funds(getAdapter());
+		Transactions transactions = new Transactions(getAdapter());
+		
+		Fund defaultFund = funds.getDefaultFund();
+		if (defaultFund != null) {
+			transactions.setFund(defaultFund);
+		}
+		
+		// components 
+		
+		ResourceBundle bundle = ResourceBundle.getBundle("biz.martyn.budget.i18n.Text", Locale.ENGLISH);
 		
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Container contentPane = frame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
-
-		// models
-		Funds funds = new Funds(getAdapter());
-		Transactions transactions = new Transactions(getAdapter());
 		
 		// toolbar 
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
@@ -54,7 +62,6 @@ public class Budget {
 	    
 		// transactions table
 		TransactionsTable table = new TransactionsTable(transactions, bundle);
-		table.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		

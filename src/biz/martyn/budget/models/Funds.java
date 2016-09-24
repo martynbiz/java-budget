@@ -17,6 +17,26 @@ public class Funds implements Iterable<Fund> {
     	funds = storageAdapter.loadFunds();
     }
 
+	public Fund get(int i) {
+		return (!funds.isEmpty()) ? funds.get(0) : null;
+	}
+	
+	public Fund getFundByName(String fundName) {
+		Fund match = null;
+		for (Fund fund : funds) {
+			if (fund.name == fundName) {
+				match = fund;
+			}
+		}
+		return match;
+	}
+
+	public Fund getDefaultFund() {
+		
+		// first fund is default 
+		return get(0);
+	}
+
     public void insert(Fund fund) {
         funds.add(fund);
     	storageAdapter.writeFunds(funds);

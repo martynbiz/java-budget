@@ -40,10 +40,14 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 	 * @var Transactions
 	 */
 	Transactions transactions;
+	
+	ResourceBundle bundle;
 
     public NewTransactionDialog(Transactions transactions, ResourceBundle bundle) {
 		
 		this.transactions = transactions;
+		this.bundle = bundle;
+		
 		category = new CategoryComboBox(transactions);
         
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -94,10 +98,10 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
     	
-    	// show the new transaction dialog 
-        setVisible(true);
-        
-        if(saveButton == e.getSource()) {
+    	if (transactions.getFund() == null) {
+    		JOptionPane.showMessageDialog(null, bundle.getString("alert_select_fund"));
+    	}      
+    	else if(saveButton == e.getSource()) {
         	
         	// save transaction
         	Transaction transaction = transactions.createObject(
@@ -123,5 +127,10 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 			// close 
 			setVisible(false);
 		}
+    	else {
+    		
+    		// show the new transaction dialog 
+            setVisible(true);
+    	}   
     }
 }

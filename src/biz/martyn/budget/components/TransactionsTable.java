@@ -37,6 +37,8 @@ public class TransactionsTable extends JTable implements Observer {
 		};
 		setModel( new DefaultTableModel(columnNames, 0) );
 		
+		this.setAutoCreateRowSorter(true);
+		
 		update();
 
 //		this.getModel().addTableModelListener(new TableModelListener() {

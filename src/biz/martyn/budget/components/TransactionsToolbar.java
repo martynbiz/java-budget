@@ -15,8 +15,6 @@ public class TransactionsToolbar extends JToolBar {// implements Observer {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-//	Funds funds;
-	
 	JButton newFundButton;
 	JButton newTransactionButton;
 	FundsComboBox fundsComboBox;
@@ -39,7 +37,7 @@ public class TransactionsToolbar extends JToolBar {// implements Observer {
 	    this.addSeparator();
 		
 		// funds drop down
-	    fundsComboBox = new FundsComboBox(funds);
+	    fundsComboBox = new FundsComboBox(funds, transactions);
 	    this.add(fundsComboBox);
 	}
 }
