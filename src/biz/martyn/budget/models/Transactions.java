@@ -2,19 +2,17 @@ package biz.martyn.budget.models;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import biz.martyn.budget.Budget;
-import biz.martyn.budget.Observable;
-import biz.martyn.budget.Observer;
+import biz.martyn.budget.storage.StorageAdapter;
 
-public class Transactions implements Observable {
+public class Transactions extends AbstractModel {
 
-    private List<Observer> observers = new ArrayList<Observer>();
     private ArrayList<Transaction> transactions;
+    private StorageAdapter storageAdapter;
     
-    public Transactions() {
-    	transactions = Budget.getAdapter().loadTransactions();
+    public Transactions(StorageAdapter storageAdapter) {
+    	this.storageAdapter = storageAdapter;
+    	transactions = storageAdapter.loadTransactions();
     }
 
     public ArrayList<Transaction> get() {
@@ -24,23 +22,13 @@ public class Transactions implements Observable {
     public boolean insert(Transaction transaction) {
     	
     	transactions.add(transaction);
-    	boolean result = Budget.getAdapter().writeTransactions(transactions);
+    	boolean result = storageAdapter.writeTransactions(transactions);
     	
     	if (result) {
             notifyObservers();
     	}
     	
     	return result;
-    }
-
-    public void addObserver(Observer observer){
-        observers.add(observer);		
-    }
-
-    public void notifyObservers(){
-        for (Observer observer : observers) {
-            observer.update();
-        }
     }
 
 	public String [] getCategoriesArray() {

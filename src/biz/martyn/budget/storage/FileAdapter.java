@@ -23,17 +23,6 @@ public class FileAdapter implements StorageAdapter {
 	
 	public ArrayList<Transaction> loadTransactions() {
 		
-//		// create a new file 
-//    	if(!transactionsFile.exists()) { 
-//    		
-//    		// fill with some test data 
-//    		ArrayList<Transaction> transactions = new ArrayList<>();
-//    		transactions.add(new Transaction("Internet", "2016-09-20", -28));
-//    		transactions.add(new Transaction("Groceries", "2016-09-20", -26));
-//    		
-//    		writeFile(transactionsFile, transactions);
-//    	}
-		
 		return loadFile(transactionsFile);
 	}
 	

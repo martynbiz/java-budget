@@ -43,8 +43,8 @@ public class Budget {
 		contentPane.setLayout(new BorderLayout());
 
 		// observable objects
-		Transactions transactions = new Transactions();
-		Funds funds = new Funds();
+		Transactions transactions = new Transactions(getAdapter());
+		Funds funds = new Funds(getAdapter());
 		
 		// toolbar 
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
