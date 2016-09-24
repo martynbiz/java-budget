@@ -60,10 +60,10 @@ public class Transactions implements Observable {
 		return categories.toArray(new String[0]);
 	}
 	
-//	public Transaction createObject(String desc, String date, int amount, String category) {
-//		Transaction transaction = new Transaction(desc, date, amount, category);
-//		return transaction;
-//	}
+	public Transaction createObject(String desc, String date, int amount, String category) {
+		Transaction transaction = new Transaction(desc, date, amount, category);
+		return transaction;
+	}
 }
 
 

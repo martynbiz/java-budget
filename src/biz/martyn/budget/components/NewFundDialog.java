@@ -66,7 +66,7 @@ public class NewFundDialog extends JDialog implements ActionListener {
         if(saveButton == e.getSource()) {
         	
         	// save fund
-        	Fund fund = new Fund(
+        	Fund fund = funds.createObject(
     			name.getText()
         	);
         	

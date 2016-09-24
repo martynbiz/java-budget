@@ -1,5 +1,7 @@
 package biz.martyn.budget.components;
 
+import java.util.ResourceBundle;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +22,7 @@ public class TransactionsTable extends JTable implements Observer {
 	 */
 	Transactions transactions;
 
-	public TransactionsTable(Transactions transactions) {
+	public TransactionsTable(Transactions transactions, ResourceBundle bundle) {
 		
 		this.transactions = transactions;
 		
@@ -28,7 +30,11 @@ public class TransactionsTable extends JTable implements Observer {
 		transactions.addObserver(this);
 		
 		// set the table model 
-		Object [] columnNames = { "Description", "Date", "Amount" };
+		Object [] columnNames = { 
+			bundle.getString("th_description"), 
+			bundle.getString("th_date"), 
+			bundle.getString("th_amount") 
+		};
 		setModel( new DefaultTableModel(columnNames, 0) );
 		
 		update();

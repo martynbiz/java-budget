@@ -3,6 +3,8 @@ package biz.martyn.budget.components;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,12 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import biz.martyn.budget.DateLabelFormatter;
 import biz.martyn.budget.models.Transaction;
 import biz.martyn.budget.models.Transactions;
 
-//import org.jdatepicker.impl.JDatePanelImpl;
-//import org.jdatepicker.impl.JDatePickerImpl;
-//import org.jdatepicker.impl.UtilDateModel;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 public class NewTransactionDialog extends JDialog implements ActionListener {
 	
@@ -26,19 +29,19 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 
 	private JPanel panel = new JPanel(new GridLayout(0, 1));
 	
-    private JTextField desc = new JTextField();
-    private JTextField date = new JTextField();
-    private JTextField amount = new JTextField("0");
+    private JTextField desc;
+    private JDatePickerImpl datePicker;
+    private JTextField amount;
     private CategoryComboBox category;
-    private JButton saveButton = new JButton("Add");
-    private JButton cancelButton = new JButton("Cancel");
+    private JButton saveButton;
+    private JButton cancelButton;
 	
 	/**
 	 * @var Transactions
 	 */
 	Transactions transactions;
 
-    public NewTransactionDialog(Transactions transactions) {
+    public NewTransactionDialog(Transactions transactions, ResourceBundle bundle) {
 		
 		this.transactions = transactions;
 		category = new CategoryComboBox(transactions);
@@ -46,40 +49,47 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
         // description 
-        panel.add(new JLabel("Description:"));
+        desc = new JTextField();
+        panel.add(new JLabel(bundle.getString("description_label")));
         panel.add(desc);
         
         // date 
-        panel.add(new JLabel("Date:"));
-        panel.add(date);
-//        UtilDateModel model = new UtilDateModel();
-//        JDatePanelImpl datePanel = new JDatePanelImpl(model, null);
-//        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, null);
-//		panel.add(datePicker);
+        panel.add(new JLabel(bundle.getString("date_label")));
+//        panel.add(date);
+        Properties properties = new Properties();
+        properties.put("text.today", bundle.getString("today"));
+        properties.put("text.month", bundle.getString("month"));
+        properties.put("text.year", bundle.getString("year"));
+        UtilDateModel model = new UtilDateModel();
+        model.setSelected(true); // today
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, properties);
+        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		panel.add(datePicker);
         
         // amount
-        panel.add(new JLabel("Amount:"));
+		amount = new JTextField("0");
+        panel.add(new JLabel(bundle.getString("amount_label")));
         panel.add(amount);
         
         // category
-        panel.add(new JLabel("Category: (optional)"));        
+        panel.add(new JLabel(bundle.getString("category_label")));        
 	    panel.add(category);
 	    
 	    panel.add(new JSeparator());
 	    
 	    // save button 
-//	    saveButton = new JButton("Add");
+	    saveButton = new JButton(bundle.getString("btn_save"));
 	    saveButton.addActionListener(this);
 	    panel.add(saveButton); 
 	      
 	    // cancel button 
-//	    cancelButton = new JButton("Cancel");
+	    cancelButton = new JButton(bundle.getString("btn_cancel"));
 	    cancelButton.addActionListener(this);
 	    panel.add(cancelButton);
         
         getContentPane().add(panel);
         pack();
-//        setLocationRelativeTo(panel);
+        setLocationRelativeTo(panel);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -90,9 +100,9 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         if(saveButton == e.getSource()) {
         	
         	// save transaction
-        	Transaction transaction = new Transaction(
+        	Transaction transaction = transactions.createObject(
     			desc.getText(), 
-    			date.getText(), 
+    			datePicker.getModel().getValue().toString(), 
     			Integer.parseInt(amount.getText()),
     			(category.getSelectedItem() != null) ? category.getSelectedItem().toString() : ""
         	);

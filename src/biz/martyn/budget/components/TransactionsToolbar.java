@@ -1,33 +1,30 @@
 package biz.martyn.budget.components;
 
+import java.util.ResourceBundle;
+
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JToolBar;
 
-import biz.martyn.budget.Observer;
-import biz.martyn.budget.models.Fund;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;
 
-public class TransactionsToolbar extends JToolBar implements Observer {
+public class TransactionsToolbar extends JToolBar {// implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	Funds funds;
+//	Funds funds;
 	
 	JButton newFundButton;
 	JButton newTransactionButton;
-	JComboBox<String> fundsComboBox;
+	FundsComboBox fundsComboBox;
 	
-	public TransactionsToolbar(Transactions transactions, Funds funds) {
+	public TransactionsToolbar(Transactions transactions, Funds funds, ResourceBundle bundle) {
 		
-		this.funds = funds;
-	    
-	    // fund button and dialog
-	    newFundButton = new JButton("New fund");
+		// fund button and dialog
+	    newFundButton = new JButton(bundle.getString("btn_new_fund"));
 		NewFundDialog fundsDialog = new NewFundDialog(funds);
 		fundsDialog.setLocationRelativeTo(this);
 	    newFundButton.addActionListener(fundsDialog);
@@ -35,26 +32,14 @@ public class TransactionsToolbar extends JToolBar implements Observer {
 	    this.addSeparator();
 
 	    // transaction button and dialog
-	    newTransactionButton = new JButton("New transaction");
-		NewTransactionDialog transactionsDialog = new NewTransactionDialog(transactions);
-		transactionsDialog.setLocationRelativeTo(this);
+	    newTransactionButton = new JButton(bundle.getString("btn_new_transaction"));
+		NewTransactionDialog transactionsDialog = new NewTransactionDialog(transactions, bundle);
 	    newTransactionButton.addActionListener(transactionsDialog);
 	    this.add(newTransactionButton);
 	    this.addSeparator();
 		
 		// funds drop down
-		funds.addObserver(this);
-	    fundsComboBox = new JComboBox<>();
+	    fundsComboBox = new FundsComboBox(funds);
 	    this.add(fundsComboBox);
-	    
-	    update();
-	}
-
-	@Override
-	public void update() {
-		fundsComboBox.removeAllItems();
-		for (Fund f : funds.get()) {
-	    	fundsComboBox.addItem( f.name );
-		}
 	}
 }

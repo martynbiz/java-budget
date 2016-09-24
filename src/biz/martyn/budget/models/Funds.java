@@ -33,15 +33,6 @@ public class Funds implements Observable {
     	return result;
     }
 
-//    public ArrayList<Fund> get() {
-//        return funds;
-//    }
-
-//    public void set(ArrayList<Fund> funds) {
-//    	Budget.getAdapter().writeFunds(funds);
-//        notifyAllObservers();
-//    }
-
     public void addObserver(Observer observer){
         observers.add(observer);		
     }
@@ -51,6 +42,11 @@ public class Funds implements Observable {
             observer.update();
         }
     } 	
+	
+	public Fund createObject(String name) {
+		Fund fund = new Fund(name);
+		return fund;
+	}
 }
 
 

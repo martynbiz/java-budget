@@ -1,4 +1,4 @@
-// TODO date selector
+// TODO switch funds 
 // TODO maven
 // TODO java table filter
 // TODO graphs
@@ -7,7 +7,6 @@
 
 // TODO configuration
 // TODO Nicer GUI
-// TODO multiple languages
 // TODO write to sqlite db with SQLiteAdapter class
 
 // TODO android app 
@@ -17,6 +16,8 @@ package biz.martyn.budget;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -29,25 +30,28 @@ import biz.martyn.budget.storage.FileAdapter;
 import biz.martyn.budget.storage.StorageAdapter;
 
 public class Budget {
+	
 	public static void main(String args[]) {
+		
+		Locale locale = new Locale("ja"); // Locale.ENGLISH
+		ResourceBundle bundle = ResourceBundle.getBundle("biz.martyn.budget.i18n.Text", locale);
 		
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Container contentPane = frame.getContentPane();
+		contentPane.setLayout(new BorderLayout());
 
 		// observable objects
 		Transactions transactions = new Transactions();
 		Funds funds = new Funds();
 		
-//		System.out.println(transactions.getCategoriesArray());
-		
 		// toolbar 
-		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds);
-	    contentPane.add(toolbar, BorderLayout.NORTH);
+		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
+		contentPane.add(toolbar, BorderLayout.NORTH);
 	    
 		// transactions table
-		TransactionsTable table = new TransactionsTable(transactions);
+		TransactionsTable table = new TransactionsTable(transactions, bundle);
 		table.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane = new JScrollPane(table);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
