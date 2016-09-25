@@ -1,4 +1,5 @@
-// TODO create custom tabel model so we can isCellEditable for id column
+// TODO sort filter 
+// TODO tidy up 
 // TODO hide table columns (e.g. id)
 // TODO maven
 // TODO java table filter
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
+import biz.martyn.budget.components.TransactionsFilterToolbar;
 import biz.martyn.budget.components.TransactionsTable;
 import biz.martyn.budget.components.TransactionsToolbar;
 import biz.martyn.budget.models.Fund;
@@ -59,7 +61,11 @@ public class Budget {
 		// toolbar 
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
 		contentPane.add(toolbar, BorderLayout.NORTH);
-	    
+		
+		// filter toolbar
+		TransactionsFilterToolbar filterPanel = new TransactionsFilterToolbar(transactions, bundle);
+		contentPane.add(filterPanel, BorderLayout.SOUTH);
+		
 		// transactions table
 		TransactionsTable table = new TransactionsTable(transactions, bundle);
 		JScrollPane scrollPane = new JScrollPane(table);

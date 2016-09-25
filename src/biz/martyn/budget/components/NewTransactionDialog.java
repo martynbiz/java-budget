@@ -47,8 +47,6 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 		
 		this.transactions = transactions;
 		this.bundle = bundle;
-		
-		category = new CategoryComboBox(transactions);
         
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
@@ -59,7 +57,6 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
         
         // date 
         panel.add(new JLabel(bundle.getString("date_label")));
-//        panel.add(date);
         Properties properties = new Properties();
         properties.put("text.today", bundle.getString("today"));
         properties.put("text.month", bundle.getString("month"));
@@ -71,12 +68,13 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 		panel.add(datePicker);
         
         // amount
-		amount = new JTextField("0");
+		amount = new JTextField();
         panel.add(new JLabel(bundle.getString("amount_label")));
         panel.add(amount);
         
-        // category
-        panel.add(new JLabel(bundle.getString("category_label")));        
+        // category  
+		category = new CategoryComboBox(transactions);  
+        panel.add(new JLabel(bundle.getString("category_label")));    
 	    panel.add(category);
 	    
 	    panel.add(new JSeparator());

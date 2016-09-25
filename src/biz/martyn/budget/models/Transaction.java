@@ -53,6 +53,11 @@ public class Transaction implements Serializable {
 			errors.add("Amount cannot be zero");
 	    }
 		
+		// check amount
+		if (category.isEmpty()) {
+			errors.add("Missing category");
+	    }
+		
 		return errors.isEmpty();
 	}
 	

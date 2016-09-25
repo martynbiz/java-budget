@@ -1,6 +1,7 @@
 package biz.martyn.budget.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -23,8 +24,8 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 //    	filter.put("date_gt", "");
 //    	filter.put("date_lt", "");
 //    	filter.put("category", "Groceries");
-    	filter.put("amount_gte", 20);
-    	filter.put("amount_lte", 100);
+//    	filter.put("amount_gte", 20);
+//    	filter.put("amount_lte", 100);
     }
     
     /**	
@@ -125,8 +126,8 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 			}
 		}
 		
-//		// sort categories
-//		Collections.sort(categories);
+		// sort categories
+		Collections.sort(categories);
         
 		return categories.toArray(new String[0]);
 	}
@@ -158,20 +159,6 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 		Transaction transaction = new Transaction(desc, date, amount, category);
 		return transaction;
 	}
-    
-    
-    
-//    private List<Observer> observers = new ArrayList<Observer>();
-//
-//    public void addObserver(Observer observer){
-//        observers.add(observer);		
-//    }
-//
-//    public void notifyObservers(){
-//        for (Observer observer : observers) {
-//            observer.update();
-//        }
-//    }
 
     class TransactionsIterator implements Iterator<Transaction> {
         
@@ -211,17 +198,23 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
         
         private boolean validate(Transaction transaction) {
         	
+        	// match category
+        	if (filter.containsKey("category")) {
+        		if (!transaction.category.equals(filter.get("category"))) {
+        			return false;
+        		}
+        	}
+        	
         	// check amount is greater than or equal to filter
         	if (filter.containsKey("amount_gte")) {
-        		if (transaction.amount < (int) filter.get("amount_gte")) {
+        		if (transaction.amount < Integer.parseInt((String) filter.get("amount_gte"))) {
         			return false;
         		}
         	}
         	
         	// check amount is less than or equal to filter
         	if (filter.containsKey("amount_lte")) {
-        		System.out.println("  amount_lte: " + transaction.amount + " < " + (int) filter.get("amount_lte"));
-        		if (transaction.amount > (int) filter.get("amount_lte")) {
+        		if (transaction.amount > Integer.parseInt((String) filter.get("amount_lte"))) {
         			return false;
         		}
         	}
