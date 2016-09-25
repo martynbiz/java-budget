@@ -1,7 +1,11 @@
 package biz.martyn.budget.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,13 +23,13 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
     	this.storageAdapter = storageAdapter;
     	transactions = new ArrayList<>();
     	
-    	// default filter
-    	filter = new HashMap<>();
-//    	filter.put("date_gt", "");
-//    	filter.put("date_lt", "");
-//    	filter.put("category", "Groceries");
-//    	filter.put("amount_gte", 20);
-//    	filter.put("amount_lte", 100);
+    	// set default filters
+    	Calendar cal = Calendar.getInstance();
+    	cal.add(Calendar.MONTH, -1);
+    	Date date = cal.getTime();
+    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    String formattedDate = df.format(date);
+    	filter.put("date_gte", formattedDate); // one month ago 
     }
     
     /**	
@@ -46,7 +50,7 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
     /**
      * Used by iterator hasNext and next
      */
-	private HashMap<String, Object> filter;
+	private HashMap<String, Object> filter = new HashMap<>();
 
 	/**
 	 * Get a transaction by it's id string 
@@ -102,6 +106,13 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 	public void setFilter(HashMap<String, Object> filter) {
 		this.filter = filter;
     	notifyObservers();
+	}
+	
+	/**
+	 * Anything (e.g. filter toolbar) that wants filter can access it
+	 */
+	public HashMap<String, Object> getFilter() {
+		return filter;
 	}
 	
 	/**
@@ -201,6 +212,20 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
         	// match category
         	if (filter.containsKey("category")) {
         		if (!transaction.category.equals(filter.get("category"))) {
+        			return false;
+        		}
+        	}
+        	
+        	// check amount is greater than or equal to filter
+        	if (filter.containsKey("date_gte")) {
+        		if (transaction.date.compareTo((String) filter.get("date_gte")) < 0) {
+        			return false;
+        		}
+        	}
+        	
+        	// check date is less than or equal to filter
+        	if (filter.containsKey("date_lte")) {
+        		if (transaction.date.compareTo((String) filter.get("date_lte")) > 0) {
         			return false;
         		}
         	}

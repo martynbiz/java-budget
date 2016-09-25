@@ -3,6 +3,9 @@ package biz.martyn.budget.components;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -101,10 +104,15 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
     	}      
     	else if(saveButton == e.getSource()) {
         	
+    	    Date selectedDate = (Date) datePicker.getModel().getValue();
+    	    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    	    String formattedDate = df.format(selectedDate);
+    		
         	// save transaction
         	Transaction transaction = transactions.createObject(
     			desc.getText(), 
-    			datePicker.getModel().getValue().toString(), 
+    			formattedDate,
+//    			datePicker.getModel().getValue().toString(), 
     			Integer.parseInt(amount.getText()),
     			(category.getSelectedItem() != null) ? category.getSelectedItem().toString() : ""
         	);
@@ -112,7 +120,8 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
             if (transaction.isValid()) {
             	transactions.insert(transaction); // TODO handle false
             	setVisible(false);
-            } else {
+            } 
+            else {
             	String message = "Please fix the following:\n";
             	for( Object err : transaction.getErrors() ) {
                 	message += "- " + err + "\n";

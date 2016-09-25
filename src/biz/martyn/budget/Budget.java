@@ -1,13 +1,13 @@
-// TODO sort filter 
-// TODO tidy up 
-// TODO hide table columns (e.g. id)
-// TODO maven
-// TODO java table filter
 // TODO graphs
+// TODO set ints as doubles? for uk currency etc
+// TODO delete transactions 
+// TODO total
+// TODO language switcher 
+// TODO java table filter
 // TODO testing
 // TODO docblocks, javadoc
-// TODO language switcher 
 
+// TODO maven
 // TODO configuration
 // TODO Nicer GUI
 // TODO write to sqlite db with SQLiteAdapter class
@@ -22,8 +22,11 @@ import java.awt.Container;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 import biz.martyn.budget.components.TransactionsFilterToolbar;
 import biz.martyn.budget.components.TransactionsTable;
@@ -61,7 +64,7 @@ public class Budget {
 		// toolbar 
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
 		contentPane.add(toolbar, BorderLayout.NORTH);
-		
+				
 		// filter toolbar
 		TransactionsFilterToolbar filterPanel = new TransactionsFilterToolbar(transactions, bundle);
 		contentPane.add(filterPanel, BorderLayout.SOUTH);
@@ -69,9 +72,19 @@ public class Budget {
 		// transactions table
 		TransactionsTable table = new TransactionsTable(transactions, bundle);
 		JScrollPane scrollPane = new JScrollPane(table);
-		contentPane.add(scrollPane, BorderLayout.CENTER);
+//		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		frame.setSize(600, 300);
+		JTabbedPane tabbedPane = new JTabbedPane();
+		JComponent tabPanel1 = new JPanel();
+		tabPanel1.add(scrollPane);
+		tabbedPane.addTab("Overview", null, tabPanel1);
+
+		JComponent tabPanel2 = new JPanel();
+		tabbedPane.addTab("Graph", null, tabPanel2);
+		
+		contentPane.add(tabbedPane, BorderLayout.CENTER);
+		
+		frame.setSize(800, 500);
 		frame.setVisible(true);
 	}
 	
