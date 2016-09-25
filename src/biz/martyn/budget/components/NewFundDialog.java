@@ -70,7 +70,7 @@ public class NewFundDialog extends JDialog implements ActionListener {
     			name.getText()
         	);
         	
-            if (fund.isValid()) {
+            if (fund.isValid(funds)) {
             	funds.insert(fund); // TODO handle false
             	setVisible(false);
             } else {

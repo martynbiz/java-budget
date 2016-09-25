@@ -24,7 +24,7 @@ public class Funds implements Iterable<Fund> {
 	public Fund getFundByName(String fundName) {
 		Fund match = null;
 		for (Fund fund : funds) {
-			if (fund.name == fundName) {
+			if (fund.name.equals(fundName)) {
 				match = fund;
 			}
 		}

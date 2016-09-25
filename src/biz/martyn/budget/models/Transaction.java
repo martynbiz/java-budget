@@ -2,19 +2,23 @@ package biz.martyn.budget.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Transaction implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	public String id;
 	public String desc; 
 	public String date; 
 	public int amount; 
 	public String category; // optional
 	
 	ArrayList<Object> errors = new ArrayList<>();
+//UUID.randomUUID()
 	
 	public Transaction(String desc, String date, int amount, String category) {
+		this.id = getNextId();
 		this.desc = desc;
 		this.date = date;
 		this.amount = amount;
@@ -23,6 +27,11 @@ public class Transaction implements Serializable {
 	
 	public Transaction(String desc, String date, int amount) {
 		this(desc, date, amount, "");
+	}
+
+    private String getNextId() {
+		String id = UUID.randomUUID().toString();
+    	return id;
 	}
 	
 	public boolean isValid() {
@@ -43,11 +52,6 @@ public class Transaction implements Serializable {
 		if (amount == 0) {
 			errors.add("Amount cannot be zero");
 	    }
-				
-//		// check category 
-//		if (category.isEmpty()) {
-//			errors.add("Missing category");
-//	    }
 		
 		return errors.isEmpty();
 	}
@@ -58,8 +62,10 @@ public class Transaction implements Serializable {
 	
 	public String[] toStringArray() {
 		String[] obj = {
+			id,
 			desc,
 			date,
+			category,
 			Integer.toString(amount)
 		};
 		

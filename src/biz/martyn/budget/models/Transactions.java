@@ -19,13 +19,26 @@ public class Transactions implements Iterable<Transaction> {
     	transactions = new ArrayList<>();
     }
 
+	public Transaction get(int i) {
+		return (!transactions.isEmpty()) ? transactions.get(0) : null;
+	}
+
     public void insert(Transaction transaction) {
         transactions.add(transaction);
-    	storageAdapter.writeTransactions(transactions, fund);
+        writeToFile();
     	notifyObservers();
     }
 
-    public void setFund(Fund fund) {
+    /**
+     * This just provides an external means to write to file if updated 
+     * transactions or a single transaction (e.g. table)
+     * @return void
+     */
+    public void writeToFile() {
+    	storageAdapter.writeTransactions(transactions, fund);
+    }
+
+	public void setFund(Fund fund) {
     	this.fund = fund;
     	transactions = storageAdapter.loadTransactions(fund);
     	notifyObservers();
@@ -98,6 +111,16 @@ public class Transactions implements Iterable<Transaction> {
 
 	public Fund getFund() {
 		return fund;
+	}
+
+	public Transaction getById(String id) {
+		Transaction match = null;
+		for (Transaction transaction : transactions) {
+			if (transaction.id.equals(id)) {
+				match = transaction;
+			}
+		}
+		return match;
 	}
 }
 

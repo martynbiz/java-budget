@@ -1,5 +1,5 @@
-// TODO no duplicate fund names
-// TODO edit transactions 
+// TODO create custom tabel model so we can isCellEditable for id column
+// TODO hide table columns (e.g. id)
 // TODO maven
 // TODO java table filter
 // TODO graphs
