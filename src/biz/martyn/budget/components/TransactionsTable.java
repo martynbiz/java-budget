@@ -87,8 +87,8 @@ public class TransactionsTable extends JTable implements Observer {
 		
 		// rebuild the table rows 
 		tableModel.setRowCount(0);
-		for (Transaction t : transactions) {
-			tableModel.addRow( t.toStringArray() );
+		for (String [] row : transactions.toStringArray()) {
+			tableModel.addRow( row );
 		}
 	}
 }

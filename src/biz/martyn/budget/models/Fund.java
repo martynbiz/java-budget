@@ -30,7 +30,7 @@ public class Fund implements Serializable {
 		// check name 
 		if (name.isEmpty()) {
 			errors.add("Missing name");
-	    } else if (funds.getFundByName(name) != null) {
+	    } else if (funds.getByName(name) != null) {
 	    	errors.add("'" + name + "' fund already exists");
 	    }
 		

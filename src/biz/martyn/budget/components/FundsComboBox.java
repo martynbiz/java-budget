@@ -42,7 +42,7 @@ public class FundsComboBox extends JComboBox<String> implements Observer, Action
 	public void actionPerformed(ActionEvent e) {
 		if (getSelectedItem() != null) {
 			String fundName = getSelectedItem().toString();
-			Fund fund = funds.getFundByName(fundName);
+			Fund fund = funds.getByName(fundName);
 			transactions.setFund(fund);
 		}
     }
