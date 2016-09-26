@@ -1,4 +1,4 @@
-package biz.martyn.budget.components;
+package biz.martyn.budget.ui.components;
 
 import java.util.ResourceBundle;
 
@@ -22,7 +22,7 @@ public class TransactionsTable extends JTable implements Observer {
 	/**
 	 * @var Transactions
 	 */
-	Transactions transactions;
+	private final Transactions transactions;
 
 	public TransactionsTable(final Transactions transactions, final ResourceBundle bundle) {
 		
@@ -32,7 +32,7 @@ public class TransactionsTable extends JTable implements Observer {
 		transactions.addObserver(this);
 		
 		// set the table model 
-		Object [] columnNames = { 
+		String [] columnNames = { 
 			bundle.getString("th_id"), 
 			bundle.getString("th_description"), 
 			bundle.getString("th_date"), 
@@ -41,7 +41,7 @@ public class TransactionsTable extends JTable implements Observer {
 		};
 		setModel( new DefaultTableModel(columnNames, 0) );
 		
-		this.setAutoCreateRowSorter(true);
+//		this.setAutoCreateRowSorter(true);
 
 		// listener for when table data is changed 
 		getModel().addTableModelListener(new TableModelListener() {

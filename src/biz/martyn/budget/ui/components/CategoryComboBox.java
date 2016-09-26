@@ -1,4 +1,4 @@
-package biz.martyn.budget.components;
+package biz.martyn.budget.ui.components;
 
 import java.util.ArrayList;
 import java.util.Arrays;

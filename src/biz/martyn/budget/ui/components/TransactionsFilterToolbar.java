@@ -1,4 +1,4 @@
-package biz.martyn.budget.components;
+package biz.martyn.budget.ui.components;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,17 +21,15 @@ public class TransactionsFilterToolbar extends JToolBar implements ActionListene
 		
 		// build the panel up 
 		
-		String textValue; // value to put in JTextField
-		
 		// date gte
 		dateGte = new JTextField((filter.containsKey("date_gte")) ? 
-				(String) filter.get("date_gte") : "");
+			(String) filter.get("date_gte") : "");
         this.add(new JLabel(bundle.getString("date_gte_label")));
         this.add(dateGte);
         
         // amount lte
         dateLte = new JTextField((filter.containsKey("date_lte")) ? 
-				(String) filter.get("date_lte") : "");
+			(String) filter.get("date_lte") : "");
 		this.add(new JLabel(bundle.getString("date_lte_label")));
 		this.add(dateLte);
 		
@@ -39,13 +37,13 @@ public class TransactionsFilterToolbar extends JToolBar implements ActionListene
 		
 		// amount gte
 		amountGte = new JTextField((filter.containsKey("amount_gte")) ? 
-				(String) filter.get("amount_gte") : "");
+			(String) filter.get("amount_gte") : "");
         this.add(new JLabel(bundle.getString("amount_gte_label")));
         this.add(amountGte);
 		
 		// amount lte 
         amountLte = new JTextField((filter.containsKey("amount_lte")) ? 
-				(String) filter.get("amount_lte") : "");
+			(String) filter.get("amount_lte") : "");
         this.add(new JLabel(bundle.getString("amount_lte_label")));
         this.add(amountLte);
 		

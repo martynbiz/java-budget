@@ -18,19 +18,6 @@ import biz.martyn.budget.storage.StorageAdapter;
  *
  */
 public class Transactions extends AbstractModel implements Iterable<Transaction> {
-
-    public Transactions(StorageAdapter storageAdapter) {
-    	this.storageAdapter = storageAdapter;
-    	transactions = new ArrayList<>();
-    	
-    	// set default filters
-    	Calendar cal = Calendar.getInstance();
-    	cal.add(Calendar.MONTH, -1);
-    	Date date = cal.getTime();
-    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-	    String formattedDate = df.format(date);
-    	filter.put("date_gte", formattedDate); // one month ago 
-    }
     
     /**	
      * The adapter to read/write funds and transactions (e.g. to file)
@@ -51,6 +38,19 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
      * Used by iterator hasNext and next
      */
 	private HashMap<String, Object> filter = new HashMap<>();
+
+    public Transactions(StorageAdapter storageAdapter) {
+    	this.storageAdapter = storageAdapter;
+    	transactions = new ArrayList<>();
+    	
+    	// set default filters
+    	Calendar cal = Calendar.getInstance();
+    	cal.add(Calendar.MONTH, -1);
+    	Date date = cal.getTime();
+    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    String formattedDate = df.format(date);
+    	filter.put("date_gte", formattedDate); // one month ago 
+    }
 
 	/**
 	 * Get a transaction by it's id string 
@@ -96,8 +96,16 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 	public void setFund(Fund fund) {
     	this.fund = fund;
     	transactions = storageAdapter.loadTransactions(fund);
+    	resetFilter();
     	notifyObservers();
     }
+	
+	/**
+	 * Anything (e.g. filter toolbar) that wants filter can access it
+	 */
+	public HashMap<String, Object> getFilter() {
+		return filter;
+	}
 	
 	/**
 	 * Filter for the table when displaying, used by getRow, will notify observers
@@ -109,10 +117,11 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 	}
 	
 	/**
-	 * Anything (e.g. filter toolbar) that wants filter can access it
+	 * Filter for the table when displaying, used by getRow, will notify observers
+	 * @param filter
 	 */
-	public HashMap<String, Object> getFilter() {
-		return filter;
+	public void resetFilter() {
+		setFilter(new HashMap<String, Object>());
 	}
 	
 	/**
