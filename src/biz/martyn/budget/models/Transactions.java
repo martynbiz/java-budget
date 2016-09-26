@@ -96,7 +96,6 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 	public void setFund(Fund fund) {
     	this.fund = fund;
     	transactions = storageAdapter.loadTransactions(fund);
-    	resetFilter();
     	notifyObservers();
     }
 	

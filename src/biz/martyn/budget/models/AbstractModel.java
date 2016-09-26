@@ -13,6 +13,10 @@ abstract class AbstractModel implements Observable {
     public void addObserver(Observer observer){
         observers.add(observer);		
     }
+    
+    public void removeObserver(Observer observer) {
+    	this.observers.remove(observer);
+    }
 
     public void notifyObservers(){
         for (Observer observer : observers) {
