@@ -1,8 +1,11 @@
 package biz.martyn.budget.ui.components;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
 import biz.martyn.budget.models.Funds;
@@ -15,29 +18,36 @@ public class TransactionsToolbar extends JToolBar {// implements Observer {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	JButton newFundButton;
-	JButton newTransactionButton;
-	FundsComboBox fundsComboBox;
+	private JButton newFundButton;
+	private JButton newTransactionButton;
+	private JButton deleteTransactionBtn;
+	private FundsComboBox fundsComboBox;
+	private NewFundDialog fundsDialog;
 	
-	public TransactionsToolbar(Transactions transactions, Funds funds, ResourceBundle bundle) {
-		
-		// fund button and dialog
-	    newFundButton = new JButton(bundle.getString("btn_new_fund"));
-		NewFundDialog fundsDialog = new NewFundDialog(funds);
+	private NewTransactionDialog newTransactionDialog;
+	
+	public TransactionsToolbar(final Transactions transactions, final Funds funds, final ResourceBundle bundle) {
+	    
+		fundsDialog = new NewFundDialog(funds);
 		fundsDialog.setLocationRelativeTo(this);
-	    newFundButton.addActionListener(fundsDialog);
-	    this.add(newFundButton);
-	    this.addSeparator();
-
-	    // transaction button and dialog
-	    newTransactionButton = new JButton(bundle.getString("btn_new_transaction"));
-		NewTransactionDialog transactionsDialog = new NewTransactionDialog(transactions, bundle);
-	    newTransactionButton.addActionListener(transactionsDialog);
-	    this.add(newTransactionButton);
-	    this.addSeparator();
 		
-		// funds drop down
+	    newFundButton = new JButton(bundle.getString("btn_new_fund"));
+	    newFundButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fundsDialog.setVisible(true);
+			}
+	    });
+
 	    fundsComboBox = new FundsComboBox(funds, transactions);
-	    this.add(fundsComboBox);
+	    
+	    add(newFundButton);
+	    addSeparator();
+//	    add(newTransactionButton);
+//	    addSeparator();
+//		add(deleteTransactionBtn);
+//		addSeparator();
+	    add(fundsComboBox);
 	}
 }

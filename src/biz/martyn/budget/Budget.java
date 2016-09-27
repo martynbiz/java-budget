@@ -1,6 +1,5 @@
 // TODO graphs
 // TODO set ints as doubles? for uk currency etc
-// TODO delete transactions 
 // TODO total
 // TODO language switcher 
 // TODO java table filter

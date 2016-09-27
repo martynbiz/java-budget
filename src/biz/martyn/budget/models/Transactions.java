@@ -67,6 +67,25 @@ public class Transactions extends AbstractModel implements Iterable<Transaction>
 		return match;
 	}
 
+	/**
+	 * Delete a transaction by it's id string 
+	 * @param id
+	 * @return
+	 */
+	public boolean deleteById(String id) {
+		Iterator<Transaction> i = iterator();
+		while (i.hasNext()) {
+			Transaction transaction = i.next();
+			if (transaction.id.equals(id)) {
+				i.remove();
+		        writeToFile();
+		    	notifyObservers();
+				return true;
+			}
+		}
+		return false;
+	}
+
     /**
      * Insert a new Transaction to the collection, will notify observers
      * @param transaction

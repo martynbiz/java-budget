@@ -134,10 +134,10 @@ public class NewTransactionDialog extends JDialog implements ActionListener {
 			// close 
 			setVisible(false);
 		}
-    	else {
-    		
-    		// show the new transaction dialog 
-            setVisible(true);
-    	}   
+//    	else {
+//    		
+//    		// show the new transaction dialog 
+//            setVisible(true);
+//    	}   
     }
 }

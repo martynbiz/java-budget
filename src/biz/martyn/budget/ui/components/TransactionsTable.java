@@ -3,6 +3,7 @@ package biz.martyn.budget.ui.components;
 import java.util.ResourceBundle;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +41,8 @@ public class TransactionsTable extends JTable implements Observer {
 			bundle.getString("th_amount") 
 		};
 		setModel( new DefaultTableModel(columnNames, 0) );
+		
+		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 //		this.setAutoCreateRowSorter(true);
 

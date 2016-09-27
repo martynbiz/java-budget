@@ -32,8 +32,8 @@ public class BudgetFrame extends JFrame {
 		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
 		TransactionsFilterToolbar filterPanel = new TransactionsFilterToolbar(transactions, bundle);
 		
-		tabs.addTab("Overview", new OverviewPanel(transactions, funds, bundle));
-		tabs.addTab("Graph", new GraphPanel(transactions, funds, bundle));
+		tabs.addTab(bundle.getString("tab_transactions"), new TransactionsPanel(transactions, funds, bundle));
+		tabs.addTab(bundle.getString("tab_overview"), new OverviewPanel(transactions, funds, bundle));
 		
 		getContentPane().add(toolbar, BorderLayout.NORTH);
 		getContentPane().add(tabs, BorderLayout.CENTER);
