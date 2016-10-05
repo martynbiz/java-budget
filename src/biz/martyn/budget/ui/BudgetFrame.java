@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
-import biz.martyn.budget.ui.components.TransactionsFilterToolbar;
-import biz.martyn.budget.ui.components.TransactionsToolbar;
+import biz.martyn.budget.ui.components.FundsTabPanel;
+import biz.martyn.budget.ui.components.TransactionsTabPanel;
 import biz.martyn.budget.models.Fund;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;
@@ -24,20 +24,13 @@ public class BudgetFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
-		Fund defaultFund = funds.getDefaultFund();
-		if (defaultFund != null) {
-			transactions.setFund(defaultFund);
-		}
+		tabs.addTab(bundle.getString("tab_transactions"), new TransactionsTabPanel(transactions, funds, bundle));
+		tabs.addTab(bundle.getString("tab_funds"), new FundsTabPanel(funds, bundle));
+		tabs.addTab(bundle.getString("tab_overview"), new OverviewTabPanel(transactions, funds, bundle));
 		
-		TransactionsToolbar toolbar = new TransactionsToolbar(transactions, funds, bundle);
-		TransactionsFilterToolbar filterPanel = new TransactionsFilterToolbar(transactions, bundle);
-		
-		tabs.addTab(bundle.getString("tab_transactions"), new TransactionsPanel(transactions, funds, bundle));
-		tabs.addTab(bundle.getString("tab_overview"), new OverviewPanel(transactions, funds, bundle));
-		
-		getContentPane().add(toolbar, BorderLayout.NORTH);
+		getContentPane().add(new TopPanel(funds, transactions, bundle), BorderLayout.NORTH);
 		getContentPane().add(tabs, BorderLayout.CENTER);
-		getContentPane().add(filterPanel, BorderLayout.SOUTH);
+		getContentPane().add(new BottomPanel(transactions, bundle), BorderLayout.SOUTH);
 		
 		setSize(800, 500);
 		setVisible(true);

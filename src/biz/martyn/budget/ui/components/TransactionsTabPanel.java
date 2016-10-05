@@ -1,4 +1,4 @@
-package biz.martyn.budget.ui;
+package biz.martyn.budget.ui.components;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -16,11 +16,10 @@ import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transaction;
 import biz.martyn.budget.models.Transactions;
 import biz.martyn.budget.table.TransactionTableModel;
-import biz.martyn.budget.ui.components.NewTransactionDialog;
 
-public class TransactionsPanel extends JPanel {
+public class TransactionsTabPanel extends JPanel {
 	
-	public TransactionsPanel(final Transactions transactions, Funds funds, final ResourceBundle bundle) {
+	public TransactionsTabPanel(final Transactions transactions, Funds funds, final ResourceBundle bundle) {
 		
 		setLayout(new BorderLayout());
 		

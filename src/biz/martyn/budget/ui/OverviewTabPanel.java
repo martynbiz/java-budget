@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;
 
-public class OverviewPanel extends JPanel {
+public class OverviewTabPanel extends JPanel {
 	
-	public OverviewPanel(Transactions transactions, Funds funds, ResourceBundle bundle) {
+	public OverviewTabPanel(Transactions transactions, Funds funds, ResourceBundle bundle) {
 		
 	}
 }

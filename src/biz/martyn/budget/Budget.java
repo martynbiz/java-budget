@@ -18,6 +18,7 @@ package biz.martyn.budget;
 
 import javax.swing.UIManager;
 
+import biz.martyn.budget.models.Fund;
 import biz.martyn.budget.models.Funds;
 import biz.martyn.budget.models.Transactions;
 import biz.martyn.budget.storage.FileAdapter;
@@ -36,6 +37,11 @@ public class Budget {
 		
 		Funds funds = new Funds(Budget.getAdapter());
 		Transactions transactions = new Transactions(Budget.getAdapter());
+		
+		Fund defaultFund = funds.getDefaultFund();
+		if (defaultFund != null) {
+			transactions.setFund(defaultFund);
+		}
 		
 		BudgetFrame budgetFrame = new BudgetFrame(funds, transactions);
 		budgetFrame.setVisible(true);
